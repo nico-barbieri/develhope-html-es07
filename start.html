@@ -12,7 +12,21 @@
 		}
 	</style>
 
-
+	<!--Disabilitare campo di pagamento se si seleziona piano FREE-->
+	<script>
+		function disableCheck(){
+			// console.log(document.getElementById("plan").value);
+			let free = (document.getElementById("plan").value==0)? true : false;
+			// console.log(free);
+			if (free) {
+				document.getElementById("checkout").disabled=true;
+				document.getElementById("pro").disabled=true;
+			} else {
+				document.getElementById("checkout").disabled=false;
+				document.getElementById("pro").disabled=false;
+			}
+		}
+	</script>
 </head>
 
 <body>
@@ -54,7 +68,7 @@
 				
 				<label for="plan">
 					<span>Il tuo piano di abbonamento: </span>
-					<select name="plan" id="plan">
+					<select name="plan" id="plan" onchange="disableCheck()">
 						<option value="0">Free</option>
 						<optgroup label="Mensili">
 							<option value="1599">Student - €15,99</option>
@@ -65,11 +79,11 @@
 				</label>
 				<label for="pro">
 					<span>Vuoi i vantaggi del piano PRO?</span>
-					<input type="checkbox" name="pro" id="pro" checked>
+					<input type="checkbox" name="pro" id="pro" disabled checked>
 				</label>
 			</fieldset><br>
 
-			<fieldset id="checkout">
+			<fieldset disabled id="checkout">
 				<legend>Procedi col pagamento</legend>
 
 				<label for="cardnum">
